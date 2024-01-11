@@ -22,8 +22,8 @@ import (
 	"github.com/spf13/pflag"
 	"k8s.io/klog/v2"
 
-	generatorargs "k8s.io/code-generator/cmd/register-gen/args"
-	"k8s.io/code-generator/cmd/register-gen/generators"
+	generatorargs "github.com/kzz45/code-generator/cmd/register-gen/args"
+	"github.com/kzz45/code-generator/cmd/register-gen/generators"
 )
 
 func main() {

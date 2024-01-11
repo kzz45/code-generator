@@ -23,6 +23,7 @@ import (
 	"github.com/spf13/pflag"
 	"k8s.io/klog/v2"
 
+	"github.com/kzz45/code-generator/pkg/env"
 	generatorargs "k8s.io/code-generator/cmd/client-gen/args"
 	"k8s.io/code-generator/cmd/client-gen/generators"
 	"k8s.io/code-generator/pkg/util"
@@ -32,12 +33,13 @@ func main() {
 	klog.InitFlags(nil)
 	genericArgs, customArgs := generatorargs.NewDefaults()
 
+	klog.Info("starting client-gen")
 	// Override defaults.
 	// TODO: move this out of client-gen
-	genericArgs.OutputPackagePath = "k8s.io/kubernetes/pkg/client/clientset_generated/"
+	genericArgs.OutputPackagePath = env.RepositoryFullModuleEnv() + "/pkg/client-go/"
 
 	genericArgs.AddFlags(pflag.CommandLine)
-	customArgs.AddFlags(pflag.CommandLine, "k8s.io/kubernetes/pkg/apis") // TODO: move this input path out of client-gen
+	customArgs.AddFlags(pflag.CommandLine, env.RepositoryFullModuleEnv()+"/pkg/apis") // TODO: move this input path out of client-gen
 	flag.Set("logtostderr", "true")
 	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
 	pflag.Parse()

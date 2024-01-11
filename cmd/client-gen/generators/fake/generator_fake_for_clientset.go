@@ -22,7 +22,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	clientgentypes "k8s.io/code-generator/cmd/client-gen/types"
+	clientgentypes "github.com/kzz45/code-generator/cmd/client-gen/types"
 	"k8s.io/gengo/generator"
 	"k8s.io/gengo/namer"
 	"k8s.io/gengo/types"

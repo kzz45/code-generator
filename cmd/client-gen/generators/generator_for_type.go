@@ -26,7 +26,8 @@ import (
 	"k8s.io/gengo/namer"
 	"k8s.io/gengo/types"
 
-	"k8s.io/code-generator/cmd/client-gen/generators/util"
+	"github.com/kzz45/code-generator/cmd/client-gen/generators/util"
+	"github.com/kzz45/code-generator/pkg/env"
 )
 
 // genClientForType produces a file for each top-level type.
@@ -166,7 +167,7 @@ func (g *genClientForType) GenerateType(c *generator.Context, t *types.Type, w i
 		"PatchType":            c.Universe.Type(types.Name{Package: "k8s.io/apimachinery/pkg/types", Name: "PatchType"}),
 		"ApplyPatchType":       c.Universe.Type(types.Name{Package: "k8s.io/apimachinery/pkg/types", Name: "ApplyPatchType"}),
 		"watchInterface":       c.Universe.Type(types.Name{Package: "k8s.io/apimachinery/pkg/watch", Name: "Interface"}),
-		"RESTClientInterface":  c.Universe.Type(types.Name{Package: "k8s.io/client-go/rest", Name: "Interface"}),
+		"RESTClientInterface":  c.Universe.Type(types.Name{Package: env.RepositoryFullModuleEnv() + "/pkg/client-go/rest", Name: "Interface"}),
 		"schemeParameterCodec": c.Universe.Variable(types.Name{Package: filepath.Join(g.clientsetPackage, "scheme"), Name: "ParameterCodec"}),
 		"jsonMarshal":          c.Universe.Type(types.Name{Package: "encoding/json", Name: "Marshal"}),
 	}

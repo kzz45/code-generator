@@ -48,7 +48,7 @@ import (
 	"k8s.io/gengo/examples/defaulter-gen/generators"
 	"k8s.io/klog/v2"
 
-	generatorargs "k8s.io/code-generator/cmd/defaulter-gen/args"
+	generatorargs "github.com/kzz45/code-generator/cmd/defaulter-gen/args"
 )
 
 func main() {

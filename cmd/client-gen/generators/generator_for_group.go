@@ -24,8 +24,9 @@ import (
 	"k8s.io/gengo/namer"
 	"k8s.io/gengo/types"
 
-	"k8s.io/code-generator/cmd/client-gen/generators/util"
-	"k8s.io/code-generator/cmd/client-gen/path"
+	"github.com/kzz45/code-generator/cmd/client-gen/generators/util"
+	"github.com/kzz45/code-generator/cmd/client-gen/path"
+	"github.com/kzz45/code-generator/pkg/env"
 )
 
 // genGroup produces a file for a group client, e.g. ExtensionsClient for the extension group.
@@ -98,12 +99,12 @@ func (g *genGroup) GenerateType(c *generator.Context, t *types.Type, w io.Writer
 		"apiPath":                          apiPath(g.group),
 		"schemaGroupVersion":               c.Universe.Type(types.Name{Package: "k8s.io/apimachinery/pkg/runtime/schema", Name: "GroupVersion"}),
 		"runtimeAPIVersionInternal":        c.Universe.Variable(types.Name{Package: "k8s.io/apimachinery/pkg/runtime", Name: "APIVersionInternal"}),
-		"restConfig":                       c.Universe.Type(types.Name{Package: "k8s.io/client-go/rest", Name: "Config"}),
-		"restDefaultKubernetesUserAgent":   c.Universe.Function(types.Name{Package: "k8s.io/client-go/rest", Name: "DefaultKubernetesUserAgent"}),
-		"restRESTClientInterface":          c.Universe.Type(types.Name{Package: "k8s.io/client-go/rest", Name: "Interface"}),
-		"RESTHTTPClientFor":                c.Universe.Function(types.Name{Package: "k8s.io/client-go/rest", Name: "HTTPClientFor"}),
-		"restRESTClientFor":                c.Universe.Function(types.Name{Package: "k8s.io/client-go/rest", Name: "RESTClientFor"}),
-		"restRESTClientForConfigAndClient": c.Universe.Function(types.Name{Package: "k8s.io/client-go/rest", Name: "RESTClientForConfigAndClient"}),
+		"restConfig":                       c.Universe.Type(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "Config"}),
+		"restDefaultKubernetesUserAgent":   c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "DefaultKubernetesUserAgent"}),
+		"restRESTClientInterface":          c.Universe.Type(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "Interface"}),
+		"RESTHTTPClientFor":                c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "HTTPClientFor"}),
+		"restRESTClientFor":                c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "RESTClientFor"}),
+		"restRESTClientForConfigAndClient": c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "RESTClientForConfigAndClient"}),
 		"SchemeGroupVersion":               c.Universe.Variable(types.Name{Package: path.Vendorless(g.inputPackage), Name: "SchemeGroupVersion"}),
 	}
 	sw.Do(groupInterfaceTemplate, m)

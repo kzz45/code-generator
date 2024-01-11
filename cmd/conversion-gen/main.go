@@ -100,8 +100,8 @@ import (
 	"github.com/spf13/pflag"
 	"k8s.io/klog/v2"
 
-	generatorargs "k8s.io/code-generator/cmd/conversion-gen/args"
-	"k8s.io/code-generator/cmd/conversion-gen/generators"
+	generatorargs "github.com/kzz45/code-generator/cmd/conversion-gen/args"
+	"github.com/kzz45/code-generator/cmd/conversion-gen/generators"
 )
 
 func main() {

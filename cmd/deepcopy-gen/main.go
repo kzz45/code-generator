@@ -52,7 +52,7 @@ import (
 	"k8s.io/gengo/examples/deepcopy-gen/generators"
 	"k8s.io/klog/v2"
 
-	generatorargs "k8s.io/code-generator/cmd/deepcopy-gen/args"
+	generatorargs "github.com/kzz45/code-generator/cmd/deepcopy-gen/args"
 )
 
 func main() {

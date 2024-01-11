@@ -22,7 +22,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	clientgentypes "k8s.io/code-generator/cmd/client-gen/types"
+	clientgentypes "github.com/kzz45/code-generator/cmd/client-gen/types"
+	"github.com/kzz45/code-generator/pkg/env"
 	"k8s.io/gengo/generator"
 	"k8s.io/gengo/namer"
 	"k8s.io/gengo/types"
@@ -74,15 +75,15 @@ func (g *genClientset) GenerateType(c *generator.Context, t *types.Type, w io.Wr
 	allGroups := clientgentypes.ToGroupVersionInfo(g.groups, g.groupGoNames)
 	m := map[string]interface{}{
 		"allGroups":                            allGroups,
-		"Config":                               c.Universe.Type(types.Name{Package: "k8s.io/client-go/rest", Name: "Config"}),
-		"DefaultKubernetesUserAgent":           c.Universe.Function(types.Name{Package: "k8s.io/client-go/rest", Name: "DefaultKubernetesUserAgent"}),
-		"RESTClientInterface":                  c.Universe.Type(types.Name{Package: "k8s.io/client-go/rest", Name: "Interface"}),
-		"RESTHTTPClientFor":                    c.Universe.Function(types.Name{Package: "k8s.io/client-go/rest", Name: "HTTPClientFor"}),
-		"DiscoveryInterface":                   c.Universe.Type(types.Name{Package: "k8s.io/client-go/discovery", Name: "DiscoveryInterface"}),
-		"DiscoveryClient":                      c.Universe.Type(types.Name{Package: "k8s.io/client-go/discovery", Name: "DiscoveryClient"}),
-		"NewDiscoveryClientForConfigAndClient": c.Universe.Function(types.Name{Package: "k8s.io/client-go/discovery", Name: "NewDiscoveryClientForConfigAndClient"}),
-		"NewDiscoveryClientForConfigOrDie":     c.Universe.Function(types.Name{Package: "k8s.io/client-go/discovery", Name: "NewDiscoveryClientForConfigOrDie"}),
-		"NewDiscoveryClient":                   c.Universe.Function(types.Name{Package: "k8s.io/client-go/discovery", Name: "NewDiscoveryClient"}),
+		"Config":                               c.Universe.Type(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "Config"}),
+		"DefaultKubernetesUserAgent":           c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "DefaultKubernetesUserAgent"}),
+		"RESTClientInterface":                  c.Universe.Type(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "Interface"}),
+		"RESTHTTPClientFor":                    c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/rest", Name: "HTTPClientFor"}),
+		"DiscoveryInterface":                   c.Universe.Type(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/discovery", Name: "DiscoveryInterface"}),
+		"DiscoveryClient":                      c.Universe.Type(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/discovery", Name: "DiscoveryClient"}),
+		"NewDiscoveryClientForConfigAndClient": c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/discovery", Name: "NewDiscoveryClientForConfigAndClient"}),
+		"NewDiscoveryClientForConfigOrDie":     c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/discovery", Name: "NewDiscoveryClientForConfigOrDie"}),
+		"NewDiscoveryClient":                   c.Universe.Function(types.Name{Package: env.RepositoryFullModuleEnv() + "/client-go/discovery", Name: "NewDiscoveryClient"}),
 		"flowcontrolNewTokenBucketRateLimiter": c.Universe.Function(types.Name{Package: "k8s.io/client-go/util/flowcontrol", Name: "NewTokenBucketRateLimiter"}),
 	}
 	sw.Do(clientsetInterface, m)
