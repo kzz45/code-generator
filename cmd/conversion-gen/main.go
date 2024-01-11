@@ -102,6 +102,7 @@ import (
 
 	generatorargs "github.com/kzz45/code-generator/cmd/conversion-gen/args"
 	"github.com/kzz45/code-generator/cmd/conversion-gen/generators"
+	"github.com/kzz45/code-generator/pkg/env"
 )
 
 func main() {
@@ -121,7 +122,9 @@ func main() {
 	// Not used functions or types are omitted.
 	// Adding this explicitly to InputDirs ensures that the package is fully
 	// scanned and all functions are parsed and processed.
-	genericArgs.InputDirs = append(genericArgs.InputDirs, "k8s.io/apimachinery/pkg/runtime")
+	// genericArgs.InputDirs = append(genericArgs.InputDirs, "k8s.io/apimachinery/pkg/runtime")
+	genericArgs.InputDirs = append(genericArgs.InputDirs, env.RepositoryFullModuleEnv()+"/pkg/apimachinery/runtime")
+	klog.Infof("Generating conversion code for %v", genericArgs.InputDirs)
 
 	if err := generatorargs.Validate(genericArgs); err != nil {
 		klog.Fatalf("Error: %v", err)
