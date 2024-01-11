@@ -23,10 +23,10 @@ import (
 	"github.com/spf13/pflag"
 	"k8s.io/klog/v2"
 
+	generatorargs "github.com/kzz45/code-generator/cmd/client-gen/args"
+	"github.com/kzz45/code-generator/cmd/client-gen/generators"
 	"github.com/kzz45/code-generator/pkg/env"
-	generatorargs "k8s.io/code-generator/cmd/client-gen/args"
-	"k8s.io/code-generator/cmd/client-gen/generators"
-	"k8s.io/code-generator/pkg/util"
+	"github.com/kzz45/code-generator/pkg/util"
 )
 
 func main() {
